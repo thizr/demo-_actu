@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <a href="/" class="navbar-brand">Actualités internationnal</a>
+        <form method="GET" action="/search" class="form-inline">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" value="{{ .SearchKey }}" aria-label="Search" name="search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </nav>
+
+      <section class="container">
+        <ul class="search-results">
+          {{ range .Results.Articles }}
+            <li class="news-article">
+              <div>
+                <a target="_blank" rel="noreferrer noopener" href="{{.URL}}">
+                  <h3 class="title">{{.Title }}</h3>
+                </a>
+                <p class="description">{{ .Description }}</p>
+                <div class="metadata">
+                  <p class="source">{{ .Source.Name }}</p>
+                  <time class="published-date">{{ .PublishedAt }}</time>
+                </div>
+              </div>
+              <img class="article-image" src="{{ .URLToImage }}">
+            </li>
+          {{ end }}
+        </ul>
+      </section>
+</body>
+</html>
